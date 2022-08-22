@@ -62,7 +62,7 @@ const makeCards = function (r) {
         </div>
         </div>`;
         document.querySelector(".row").append(newCard);
-    }
+    } 
     console.log("click");
 }
 
