@@ -1,3 +1,11 @@
+let trackDisplayArray = [];
+let albumDisplayArray = [];
+const modal = document.querySelector("#myModal");
+const modalHeader = modal.querySelector("#myModalLabel");
+const modalBody = modal.querySelector(".modal-body");
+const btns = document.querySelectorAll(".artistButton");
+
+
 const options = {
 	method: 'GET',
 	headers: {
@@ -9,7 +17,8 @@ const options = {
 let query = null;
 
 const loadTracks = (e) => {
-    
+    albumCount = 0;
+    trackCount = 0;
     query= e.target.innerText;
     if(query === "View All"){
         const oldCards = document.querySelectorAll(".card");
@@ -32,7 +41,7 @@ const loadTracks = (e) => {
         .then(response => response.json())
         .then(response => makeCards(response))
         .catch(err => console.error(err)); 
-
+        
     }else{
         const oldCards = document.querySelectorAll(".card");
         if(oldCards.length>0){
@@ -49,10 +58,10 @@ const loadTracks = (e) => {
     }   
 }
 const makeCards = function (r) {
-    console.log(r);
+    //console.log(r);
    
     for(let i=0; i<r.data.length; i++){
-        console.log(i)
+        
         const newCard = document.createElement("div");
         newCard.innerHTML = `<div class="card" style="width: 18rem;">
         <img src="${r.data[i].album.cover}" class="card-img-top" alt="album art">
@@ -62,26 +71,78 @@ const makeCards = function (r) {
         </div>
         </div>`;
         document.querySelector(".row").append(newCard);
-    } 
-    console.log("click");
+    }
+    countAlbums(r); 
+    countTracks(r); 
+    
+}
+//const pageCards = document.querySelectorAll(".card");
+
+
+
+const showAlbumCount = function (){
+    modalHeader.innerText = `There are ${albumDisplayArray.length} albums.`;
+    modalBody.innerText = albumDisplayArray;
+    console.log(albumDisplayArray);
+    console.log(`There are ${albumDisplayArray.length} albums.`);
+}
+    const showTrackCount = function (){
+    modalHeader.innerText = `There are ${trackDisplayArray.length} tracks.`;
+    modalBody.innerText = trackDisplayArray;
+    console.log(trackDisplayArray);
+    console.log(`There are ${trackDisplayArray.length} tracks.`);
 }
 
-const countTracks = function () {
-    const pageCards = document.querySelectorAll(".card");
-    if(pageCards.length>0){
-        for(card of pageCards){
-            
-            console.log(card.querySelector(".card-title"))
+const countAlbums = function (d) {
+    
+    let albumArray = [];
+    albumDisplayArray.push(d.data[0].album.title);
+    for(let i=0; i<d.data.length; i++){
+        const album = d.data[i].album.title;        
+        if(albumArray.length>0){
+            for(j=0; j<albumArray.length; j++){
+                if(albumArray[j] === album){
+                    break;
+                }else if(j===albumArray.length-1){                    
+                    albumDisplayArray.push(album);
+                                       
+                }
+            }
         }
+        albumArray.push(album);
+
     }
+    //console.log(albumCount,"total albums");
+}
+const countTracks = function (d) {
+    
+    let trackArray = [];
+    trackDisplayArray.push(d.data[0].title);
+    for(let i=0; i<d.data.length; i++){
+        const title = d.data[i].title;
+        if(trackArray.length>0){
+            for(j=0; j<trackArray.length; j++){
+                if(trackArray[j] === title){
+                    break;
+                }else if(j=== trackArray.length-1){                    
+                    trackDisplayArray.push(title);                   
+                }
+            }
+        }
+        trackArray.push(title);
+
+    }
+    //console.log(trackCount,"total tracks");
 }
 
 
 window.onload = () => {
-    const btns = document.querySelectorAll(".artistButton");
+    
     for(btn of btns){
     btn.addEventListener("click", loadTracks);
     }
+    const countAlbumsBtn = document.querySelector("#countAlbumsBtn");
+    countAlbumsBtn.addEventListener("click", showAlbumCount);
     const countTracksBtn = document.querySelector("#countTracksBtn");
-    countTracksBtn.addEventListener("click", console.log(countTracks));
+    countTracksBtn.addEventListener("click", showTrackCount);
 }

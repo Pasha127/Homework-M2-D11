@@ -13,8 +13,8 @@
         <button type="button" class="btn mx-1 btn-primary artistButton">Daft Punk</button>
         <button type="button" class="btn mx-1 btn-primary artistButton">Metallica</button>
         <button type="button" class="btn mx-1 btn-primary artistButton">View All</button>
-        <button type="button" id="countTracksBtn" class="btn mx-1 btn-primary" data-toggle="modal" data-target="#modal"> Count Tracks</button>        
-        <button type="button" id="countAlbumsBtn" class="btn mx-1 btn-primary" data-toggle="modal" data-target="#modal"> Count Albums</button>        
+        <button type="button" id="countTracksBtn" class="btn mx-1 btn-primary" data-toggle="modal" data-target="#myModal"> Count Tracks</button>        
+        <button type="button" id="countAlbumsBtn" class="btn mx-1 btn-primary" data-toggle="modal" data-target="#myModal"> Count Albums</button>        
         
     </div>
     <div class="container">
@@ -29,25 +29,26 @@
               </div> -->
         </div>
     </div>
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="modalLabel">Number of Tracks</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-          </div>
-        </div>
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <script src="./index.js"></script>
 </body>
 </html>
