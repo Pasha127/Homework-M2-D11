@@ -9,21 +9,48 @@ const options = {
 let query = null;
 
 const loadTracks = (e) => {
+    
     query= e.target.innerText;
+    if(query === "View All"){
+        const oldCards = document.querySelectorAll(".card");
+        if(oldCards.length>0){
+            for(card of oldCards){
+                card.remove();
+                console.log("cards erased");
+            }
+        }
+
+        fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=Pink Floyd}`, options)
+        .then(response => response.json())
+        .then(response => makeCards(response))
+        .catch(err => console.error(err)); 
+        fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=Daft Punk`, options)
+        .then(response => response.json())
+        .then(response => makeCards(response))
+        .catch(err => console.error(err)); 
+        fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=Metallica`, options)
+        .then(response => response.json())
+        .then(response => makeCards(response))
+        .catch(err => console.error(err)); 
+
+    }else{
+        const oldCards = document.querySelectorAll(".card");
+        if(oldCards.length>0){
+            for(card of oldCards){
+                card.remove();
+                console.log("card erased");
+            }
+        }
+
     fetch(`https://striveschool-api.herokuapp.com/api/deezer/search?q=${query}`, options)
         .then(response => response.json())
         .then(response => makeCards(response))
-        .catch(err => console.error(err));    
+        .catch(err => console.error(err)); 
+    }   
 }
 const makeCards = function (r) {
     console.log(r);
-    const oldCards = document.querySelectorAll(".card");
-    if(oldCards.length>0){
-        for(card of oldCards){
-            card.remove();
-            console.log("card erased");
-        }
-    }
+   
     for(let i=0; i<r.data.length; i++){
         console.log(i)
         const newCard = document.createElement("div");
@@ -39,11 +66,22 @@ const makeCards = function (r) {
     console.log("click");
 }
 
+const countTracks = function () {
+    const pageCards = document.querySelectorAll(".card");
+    if(pageCards.length>0){
+        for(card of pageCards){
+            
+            console.log(card.querySelector(".card-title"))
+        }
+    }
+}
 
 
 window.onload = () => {
-    const btns = document.querySelectorAll("button");
+    const btns = document.querySelectorAll(".artistButton");
     for(btn of btns){
     btn.addEventListener("click", loadTracks);
     }
+    const countTracksBtn = document.querySelector("#countTracksBtn");
+    countTracksBtn.addEventListener("click", console.log(countTracks));
 }
