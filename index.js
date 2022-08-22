@@ -42,7 +42,8 @@ const makeCards = function (r) {
 
 
 window.onload = () => {
-    const btn = document.querySelector("button");
+    const btns = document.querySelectorAll("button");
+    for(btn of btns){
     btn.addEventListener("click", loadTracks);
-    
+    }
 }
